@@ -7,13 +7,15 @@ class Edit extends React.Component {
       <div>
         <h1>Edit Page</h1>
 
-        <form action={`/blogs/${blogs._id}?_method=put`} method='post'>
-          Name: <input type="text" name="name" defaultValue={blogs.name} />
+        <form action={`/blog/${blogs._id}?_method=put`} method='POST'>
+          Title: <input type="text" name="title" defaultValue={blogs.title} />
           <br />
-          Color: <input type="text" name='color' defaultValue={blogs.color} />
+          Body: <input type="text" name='body' defaultValue={blogs.body} />
           <br />
-          {/* Ready to Eat: { fruit.readyToEat ? <input type="checkbox" name='readyToEat' defaultChecked /> : <input type='checkbox' name='readyToEat'/>}
-          <br /> */}
+          Author: <input type="text" name='author' defaultValue={blogs.author} />
+          <br />
+          
+          
           <input type="submit" value="Update Blogs" />
         </form>
       </div>

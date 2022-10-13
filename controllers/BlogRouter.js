@@ -23,6 +23,27 @@ router.get("/new", async (req, res) => {
       res.status(403).send("Cannot create");
     }
   });
+
+  router.get("/:id", async (req, res) => {
+    try {
+        const blogs = await BlogModel.findById(req.params.id)
+      res.render('Blogs/ShowBlog', {blog: blogs})
+    } catch (error) {
+      console.log(error);
+      res.status(403).send("Cannot create");
+    }
+  });
+
+  router.get("/:id/edit", async (req, res) => {
+    try {
+        const blogs = await BlogModel.findById(req.params.id)
+      res.render('Blogs/Edit', {blogs: blogs})
+    } catch (error) {
+      console.log(error);
+      res.status(403).send("Cannot create");
+    }
+  });
+  
   
   // POST: CREATE a New Blog
 router.post("/", async (req, res) => {
@@ -45,7 +66,7 @@ router.post("/", async (req, res) => {
 router.put('/:id', async (req, res)=> {
    try {
     const updatedBlog = await BlogModel.findByIdAndUpdate(req.params.id, req.body, {'returnDocument' :"after"})
-    res.send(updatedBlog)
+    res.redirect('/blog')
    } catch (error) {
         console.log(error);
         res.status(403).send('Cannot put')

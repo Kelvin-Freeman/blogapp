@@ -25,6 +25,8 @@ class Blogs extends React.Component {
                 <p>{blog.body}</p>
               </div>
               <h6>Written by: {blog.author}</h6>
+
+              <h6><a href={`/blog/${blog._id}/edit`}>Edit</a></h6>
             </div>
           ))}
         </section>
