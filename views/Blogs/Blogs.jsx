@@ -3,7 +3,8 @@ const NavBar = require('../components/Navbar')
 
 class Blogs extends React.Component {
   render() {
-    const { blogs } = this.props;
+    const { blogs, loggedInUser } = this.props;
+    console.log(loggedInUser);
     return (
       <div>
         <head>
@@ -26,7 +27,12 @@ class Blogs extends React.Component {
               </div>
               <h6>Written by: {blog.author}</h6>
 
+
+              {Blogs.author === loggedInUser ? (
+              <div>
               <h6><a href={`/blog/${blog._id}/edit`}>Edit</a></h6>
+             </div>
+             ) :null}
             </div>
           ))}
         </section>

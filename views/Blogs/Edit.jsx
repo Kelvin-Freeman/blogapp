@@ -18,6 +18,8 @@ class Edit extends React.Component {
           
           <input type="submit" value="Update Blogs" />
         </form>
+        <form action={`/blog/${blogs._id}?_method=delete`} method='post'>
+          <input type="submit" value="Delete" /></form>
       </div>
     );
   }

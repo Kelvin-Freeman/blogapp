@@ -1,13 +1,22 @@
 const express = require('express')
 const BlogModel = require('../models/BlogSchema')
 
-const router = express.Router()
+const router = express.Router();
+
+// Add privacy to this router or route
+router.use((req, res, next) => {
+  if (req.session.loggedIn){
+    next()
+  }else {
+    res.redirect('/user/signin')
+  }
+})
 
 // GET: All Blogs
 router.get('/', async (req, res) => {
     try {
         const blogs = await BlogModel.find({})
-        res.render('Blogs/Blogs', {blogs: blogs})
+        res.render('Blogs/Blogs', {blogs: blogs, loggedInUser: req.session.username})
     } catch (error) {
         console.log(error);
         res.status(403).send('Cannot get')
@@ -53,6 +62,9 @@ router.post("/", async (req, res) => {
       } else {
         req.body.sponsored = false;
       }
+
+      // set the author tho the loggedIn user
+      req.body.author = req.session.username
       const newBlog = await BlogModel.create(req.body);
       res.redirect("/blog");
     } catch (error) {
@@ -79,7 +91,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const deletedBlog = await BlogModel.findByIdAndRemove(req.params.id)
         console.log(deletedBlog);
-        res.send('Blog Deleted')
+        res.redirect('/blog')
     } catch (error) {
         console.log(error);
         res.status(403).send('Cannot put')
