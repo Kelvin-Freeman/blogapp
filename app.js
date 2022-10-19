@@ -34,7 +34,7 @@ app.use('/user', require('./controllers/UserRouter'))
 
 // Main home page(homepage.jsx)
 app.get('/', (req, res) => {
-    res.render('pages/HomePage')
+    res.render('Pages/HomePage')
 })
 
 
