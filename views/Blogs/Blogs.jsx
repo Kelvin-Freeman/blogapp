@@ -11,7 +11,7 @@ class Blogs extends React.Component {
           <link rel="stylesheet" href="/CSS/main.css" />
         </head>
 
-        <NavBar />
+        <NavBar loggedInUser={loggedInUser}/>
         
         <h1>Blogs</h1>
 
